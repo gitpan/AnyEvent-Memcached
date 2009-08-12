@@ -17,6 +17,7 @@ meta-spec:
 name: AnyEvent-Memcached
 no_index:
   directory:
+    - examples
     - inc
     - t
 requires:
@@ -25,4 +26,4 @@ requires:
   String::CRC32: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01_2
+version: 0.01_3
