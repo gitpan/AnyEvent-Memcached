@@ -1,6 +1,9 @@
 package AnyEvent::Memcached::Peer;
 
-use common::sense;
+use common::sense 2;m{
+use strict;
+use warnings;
+}x;
 use base 'AnyEvent::Connection';
 use Carp;
 use AnyEvent::Connection::Util;
@@ -122,6 +125,18 @@ sub reader {
 		$self->conntrack( reader => \@_, $args{cb} );
 	}
 	
+}
+
+sub want_command {
+	my $self = shift;
+	warn "wanting command";
+	if ($self->{connected}) {
+		return $self->{con}->want_command(@_);
+	}
+	else {
+		my %args = @_;
+		$self->conntrack( want_command => \@_ );
+	}
 }
 
 1;

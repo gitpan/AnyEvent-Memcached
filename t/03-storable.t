@@ -22,10 +22,11 @@ my $cg;$cg = tcp_connect $host,$port, sub {
 	undef $cg;
 	@_ or plan skip_all => "No memcached instance running at $testaddr\n";
 	diag "testing $testaddr";
-	plan tests => 3;
+	require Test::NoWarnings;Test::NoWarnings->import;
+	plan tests => 3 + 1;
 
 	my $memd = AnyEvent::Memcached->new(
-		servers   => [ $testaddr ],
+		servers   => $testaddr,
 		cv        => $cv,
 		debug     => 0,
 		namespace => "AE::Memd::t/$$/" . (time() % 100) . "/",
